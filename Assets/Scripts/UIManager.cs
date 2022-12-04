@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject wrongButton;
 
     [SerializeField] private GameObject textPanel;
+
     private void OnEnable()
     {
         EventManager.AddHandler(GameEvent.OnClosePanels,ClosePanels);
@@ -26,11 +27,43 @@ public class UIManager : MonoBehaviour
         EventManager.RemoveHandler(GameEvent.OnOpenTextPanel, TextPanelOpen);
         EventManager.RemoveHandler(GameEvent.OnCloseTextPanel, TextPanelClose);
     }
-    // Start is called before the first frame update
-    void Start()
+   
+
+
+    public void OnCorrectButton()
     {
-        
+        EventManager.Broadcast(GameEvent.OnCorrect);
+        EventManager.Broadcast(GameEvent.OnClosePanels);
     }
+
+    public void OnWrongButton()
+    {
+        EventManager.Broadcast(GameEvent.OnWrong);
+        EventManager.Broadcast(GameEvent.OnClosePanels);
+    }
+   
+    public void SetPropertyPanel(Sprite _image)
+    {
+        propertyPanel.GetComponent<Image>().sprite = _image;
+    }
+
+    public void SetCorrectButton(Sprite _image)
+    {
+        correctButton.GetComponent<Image>().sprite = _image;
+    }
+    
+    public void SetWrongButton(Sprite _image)
+    {
+        wrongButton.GetComponent<Image>().sprite = _image;
+    }
+
+    public void SetText(string _text,Color _color)
+    {
+        var _textPanel = textPanel.GetComponent<Text>();
+        _textPanel.text = _text;
+        _textPanel.color = _color;
+    }
+
     void ClosePanels()
     {
         propertyPanel.SetActive(false);
@@ -52,45 +85,9 @@ public class UIManager : MonoBehaviour
     {
         textPanel.SetActive(true);
     }
+
     void TextPanelClose()
     {
         textPanel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void OnCorrectButton()
-    {
-        EventManager.Broadcast(GameEvent.OnCorrect);
-        EventManager.Broadcast(GameEvent.OnClosePanels);
-    }
-    public void OnWrongButton()
-    {
-        EventManager.Broadcast(GameEvent.OnWrong);
-        EventManager.Broadcast(GameEvent.OnClosePanels);
-    }
-   
-    public void SetPropertyPanel(Sprite _image)
-    {
-        propertyPanel.GetComponent<Image>().sprite = _image;
-    }
-    public void SetCorrectButton(Sprite _image)
-    {
-        correctButton.GetComponent<Image>().sprite = _image;
-    }
-    public void SetWrongButton(Sprite _image)
-    {
-        wrongButton.GetComponent<Image>().sprite = _image;
-    }
-    public void SetText(string _text,Color _color)
-    {
-        var _textPanel = textPanel.GetComponent<Text>();
-        _textPanel.text = _text;
-        _textPanel.color = _color;
-        
-
     }
 }

@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class SpawnObject : MonoBehaviour
 {
-
-
-
-
-
-
-
-
     public GameObject Spawn(GameObject _object)
     {
         var _prefab = Instantiate(_object);

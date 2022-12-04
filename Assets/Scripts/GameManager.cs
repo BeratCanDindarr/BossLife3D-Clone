@@ -5,15 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    [SerializeField]private LevelScriptableObject[] levels;
-    public LevelScriptableObject level;
-    public GameObject character;
+    #region Manager
     public SpawnManager SpawnManager;
     public UIManager UIManager;
-
+    #endregion
+    public GameObject character;
     public GameObject Camera;
 
     public int CharacterNumber = 0;
+
+    public LevelScriptableObject level;
+    [SerializeField]private LevelScriptableObject[] levels;
+
+
 
     private void OnEnable()
     {
@@ -33,18 +37,20 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    void LevelSelect(int _levelNumber)
-    {
-       level = levels[_levelNumber];
-    }
-    void CharacterSelect(int _characterNumber)
-    {
-        character = level.Characters[_characterNumber];
-    }
     public void CharacterNumberChange()
     {
         CharacterNumber++;
         CharacterSelect(CharacterNumber);
+    }
+
+    void LevelSelect(int _levelNumber)
+    {
+       level = levels[_levelNumber];
+    }
+
+    void CharacterSelect(int _characterNumber)
+    {
+        character = level.Characters[_characterNumber];
     }
    
 }

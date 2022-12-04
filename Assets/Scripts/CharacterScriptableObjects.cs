@@ -15,8 +15,6 @@ public class CharacterScriptableObjects : ScriptableObject
 
     [Header("Animation")]
     public GameObject CorrectAnim;
-    
-
     public GameObject WrongAnim;
     
 
